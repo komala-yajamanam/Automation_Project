@@ -29,17 +29,3 @@ s3://upgrad-komala/komala-httpd-logs-${timestamp}.tar.gz
 
 
 
-#Add metadata to inventory.html file
-
-size=$(find "komala-httpd-logs-${timestamp}.tar.gz" -printf "%s")
-echo  "httpd-log    ${timestamp}    tar    $size" >> /var/www/html/inventory.html
-
-
-#Schedule a cron job
-
-crontab -r
-crontab -u root -l
-sudo touch /etc/cron.d/automation
-echo "40 14 * * * sh /root/Automation_Project/automation.sh" > /etc/cron.d/automation
-sudo /usr/bin/crontab /etc/cron.d/automation
-crontab -u root -l
